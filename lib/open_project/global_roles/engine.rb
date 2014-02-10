@@ -42,8 +42,8 @@ module OpenProject::GlobalRoles
       Redmine::AccessControl.permission(:add_project).global = true
     end
 
-    config.to_prepare do
-      User.register_allowance_evaluator OpenProject::GlobalRoles::PrincipalAllowanceEvaluator::Global
+    initializer 'global_roles.extend_allowance', :after => 'load_allowance' do
+      require "#{config.root}/app/models/authorization/principals"
     end
   end
 end
