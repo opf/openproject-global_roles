@@ -26,8 +26,8 @@ module OpenProject::GlobalRoles
     include OpenProject::Plugins::ActsAsOpEngine
 
     register 'openproject-global_roles',
-             :author_url => 'http://finn.de',
-             :requires_openproject => '>= 4.0.0'
+             author_url: 'http://finn.de',
+             requires_openproject: '>= 4.0.0'
 
     assets %w(global_roles/global_roles.css global_roles/global_roles.js)
 

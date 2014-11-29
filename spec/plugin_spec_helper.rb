@@ -142,7 +142,7 @@ module OpenProject
       end
 
       def create_builtin_role(name, const)
-        Role.create(:name => name, :position => 0) do |role|
+        Role.create(name: name, position: 0) do |role|
           role.builtin = const
         end
       end

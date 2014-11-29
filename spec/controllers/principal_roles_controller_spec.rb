@@ -19,7 +19,7 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PrincipalRolesController, :type => :controller do
+describe PrincipalRolesController, type: :controller do
   before(:each) do
     allow(@controller).to receive(:require_admin).and_return(true)
     allow(@controller).to receive(:check_if_login_required).and_return(true)
@@ -89,13 +89,13 @@ describe PrincipalRolesController, :type => :controller do
             before :each do
               response_should_render :replace,
                                      "available_principal_roles",
-                                     :partial => "users/available_global_roles",
-                                     :locals => {:global_roles => anything(),
-                                                 :user => anything()}
+                                     partial: "users/available_global_roles",
+                                     locals: {global_roles: anything(),
+                                                 user: anything()}
               response_should_render :insert_html,
                                      :top, 'table_principal_roles_body',
-                                     :partial => "principal_roles/show_table_row",
-                                     :locals => {:principal_role => anything()}
+                                     partial: "principal_roles/show_table_row",
+                                     locals: {principal_role: anything()}
 
               #post :create, { "format" => "js", "principal_role"=>{"principal_id"=>"3", "role_ids"=>["7"]}}
               xhr :post, :create, @params
@@ -125,8 +125,8 @@ describe PrincipalRolesController, :type => :controller do
 
             response_should_render :replace,
                                   "principal_role-#{@principal_role.id}",
-                                  :partial => "principal_roles/show_table_row",
-                                  :locals => {:principal_role => anything()}
+                                  partial: "principal_roles/show_table_row",
+                                  locals: {principal_role: anything()}
 
             xhr :put, :update, @params
           end
@@ -142,7 +142,7 @@ describe PrincipalRolesController, :type => :controller do
             response_should_render :insert_html,
                                    :top,
                                    "tab-content-global_roles",
-                                   :partial => 'errors'
+                                   partial: 'errors'
 
             xhr :put, :update, @params
           end
@@ -171,9 +171,9 @@ describe PrincipalRolesController, :type => :controller do
           response_should_render :remove, "principal_role-#{@principal_role.id}"
           response_should_render :replace,
                                  "available_principal_roles",
-                                 :partial => "users/available_global_roles",
-                                 :locals => {:global_roles => anything(),
-                                             :user => anything()}
+                                 partial: "users/available_global_roles",
+                                 locals: {global_roles: anything(),
+                                             user: anything()}
         end
 
         describe "js" do

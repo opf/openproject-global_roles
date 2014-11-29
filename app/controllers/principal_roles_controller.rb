@@ -25,12 +25,12 @@ class PrincipalRolesController < ApplicationController
     @user = Principal.find(params[:principal_role][:principal_id])
 
     call_hook :principal_roles_controller_create_before_save,
-              {:principal_roles => @principal_roles}
+              {principal_roles: @principal_roles}
 
     @principal_roles.each{ |pr| pr.save } unless performed?
 
     call_hook :principal_roles_controller_create_before_respond,
-              {:principal_roles => @principal_roles}
+              {principal_roles: @principal_roles}
 
     respond_to_create @principal_roles, @user, @global_roles unless performed?
   end
@@ -39,12 +39,12 @@ class PrincipalRolesController < ApplicationController
     @principal_role = PrincipalRole.find(params[:principal_role][:id])
 
     call_hook :principal_roles_controller_update_before_save,
-              {:principal_role => @principal_role}
+              {principal_role: @principal_role}
 
     @principal_role.update_attributes(params[:principal_role]) unless performed?
 
     call_hook :principal_roles_controller_update_before_respond,
-              {:principal_role => @principal_role}
+              {principal_role: @principal_role}
 
     respond_to_update @principal_role unless performed?
   end
@@ -55,12 +55,12 @@ class PrincipalRolesController < ApplicationController
     @global_roles = GlobalRole.all
 
     call_hook :principal_roles_controller_destroy_before_destroy,
-              {:principal_role => @principal_role}
+              {principal_role: @principal_role}
 
     @principal_role.destroy unless performed?
 
     call_hook :principal_roles_controller_destroy_before_respond,
-              {:principal_role => @principal_role}
+              {principal_role: @principal_role}
 
     respond_to_destroy @principal_role, @user, @global_roles unless performed?
   end
@@ -91,19 +91,19 @@ class PrincipalRolesController < ApplicationController
           if principal_roles.all?{|r| r.valid?}
             principal_roles.each do |role|
               page.insert_html :top, 'table_principal_roles_body',
-                               :partial => "principal_roles/show_table_row",
-                               :locals => {:principal_role => role}
+                               partial: "principal_roles/show_table_row",
+                               locals: {principal_role: role}
 
               call_hook :principal_roles_controller_create_respond_js_role,
-                        {:page => page, :principal_role => role}
+                        {page: page, principal_role: role}
             end
 
             page.replace "available_principal_roles",
-                         :partial => "users/available_global_roles",
-                         :locals => {:global_roles => global_roles,
-                                     :user => user}
+                         partial: "users/available_global_roles",
+                         locals: {global_roles: global_roles,
+                                     user: user}
           else
-            page.insert_html :top, "tab-content-global_roles", :partial => 'errors'
+            page.insert_html :top, "tab-content-global_roles", partial: 'errors'
           end
         end
       end
@@ -116,14 +116,14 @@ class PrincipalRolesController < ApplicationController
         render(:update) do |page|
           if role.valid?
             page.replace "principal_role-#{role.id}",
-                          :partial => "principal_roles/show_table_row",
-                          :locals => {:principal_role => role}
+                          partial: "principal_roles/show_table_row",
+                          locals: {principal_role: role}
           else
-            page.insert_html :top, "tab-content-global_roles", :partial => 'errors'
+            page.insert_html :top, "tab-content-global_roles", partial: 'errors'
           end
 
           call_hook :principal_roles_controller_update_respond_js_role,
-                    {:page => page, :principal_role => role}
+                    {page: page, principal_role: role}
         end
       end
     end
@@ -135,11 +135,11 @@ class PrincipalRolesController < ApplicationController
         render(:update) do |page|
           page.remove "principal_role-#{principal_role.id}"
           page.replace "available_principal_roles",
-                        :partial => "users/available_global_roles",
-                        :locals => {:user => user, :global_roles => global_roles}
+                        partial: "users/available_global_roles",
+                        locals: {user: user, global_roles: global_roles}
 
           call_hook :principal_roles_controller_update_respond_js_role,
-                        {:page => page, :principal_role => principal_role}
+                        {page: page, principal_role: principal_role}
         end
       end
     end

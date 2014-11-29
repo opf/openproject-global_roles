@@ -26,7 +26,7 @@ describe OpenProject::GlobalRoles::PrincipalAllowanceEvaluator::Global do
   let(:filter) { klass.new user }
   let(:member) { FactoryGirl.build(:member) }
   let(:principal_role) { FactoryGirl.build(:principal_role,
-                                       :role => role) }
+                                       role: role) }
   let(:principal_role2) { FactoryGirl.build(:principal_role) }
   let(:role) { FactoryGirl.build(:global_role) }
   let(:project) { FactoryGirl.build(:project) }

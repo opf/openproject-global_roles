@@ -24,21 +24,21 @@ describe Redmine::AccessControl do
     stash_access_control_permissions
 
     Redmine::AccessControl.map do |map|
-      map.permission :proj0, {:dont => :care}, :require => :member
-      map.permission :global0, {:dont => :care}, :global => true
-      map.permission :proj1, {:dont => :care}
+      map.permission :proj0, {dont: :care}, require: :member
+      map.permission :global0, {dont: :care}, global: true
+      map.permission :proj1, {dont: :care}
 
       map.project_module :global_module do |mod|
-        mod.permission :global1, {:dont => :care}, :global => true
+        mod.permission :global1, {dont: :care}, global: true
       end
 
       map.project_module :project_module do |mod|
-        mod.permission :proj2, {:dont => :care}
+        mod.permission :proj2, {dont: :care}
       end
 
       map.project_module :mixed_module do |mod|
-        mod.permission :proj3, {:dont => :care}
-        mod.permission :global2, {:dont => :care}, :global => true
+        mod.permission :proj3, {dont: :care}
+        mod.permission :global2, {dont: :care}, global: true
       end
     end
   end

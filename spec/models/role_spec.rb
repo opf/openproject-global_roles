@@ -19,17 +19,17 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
-describe Role, :type => :model do
+describe Role, type: :model do
   describe "class methods" do
     describe :givable do
       before (:each) do
         #this should not be necessary once Role (in a membership) and GlobalRole have
         #a common ancestor class, e.g. Role (a new one)
-        @mem_role1 = Role.create :name => "mem_role", :permissions => []
-        @builtin_role1 = Role.new :name => "builtin_role1",  :permissions => []
+        @mem_role1 = Role.create name: "mem_role", permissions: []
+        @builtin_role1 = Role.new name: "builtin_role1",  permissions: []
         @builtin_role1.builtin = 3
         @builtin_role1.save
-        @global_role1 = GlobalRole.create :name => "global_role1", :permissions => []
+        @global_role1 = GlobalRole.create name: "global_role1", permissions: []
       end
 
       it {expect(Role.find_all_givable.size).to eq(1)}

@@ -26,7 +26,7 @@ module OpenProject::GlobalRoles::Patches
 
       base.class_eval do
 
-        before_filter :add_global_roles, :only => [:edit]
+        before_filter :add_global_roles, only: [:edit]
       end
     end
 

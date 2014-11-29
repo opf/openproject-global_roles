@@ -19,8 +19,8 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
-describe GlobalRole, :type => :model do
-  before {GlobalRole.create :name => "globalrole", :permissions => ["permissions"]} # for validate_uniqueness_of
+describe GlobalRole, type: :model do
+  before {GlobalRole.create name: "globalrole", permissions: ["permissions"]} # for validate_uniqueness_of
 
   it {is_expected.to have_many :principals}
   it {is_expected.to have_many :principal_roles}
@@ -120,7 +120,7 @@ describe GlobalRole, :type => :model do
     end
 
     describe "WITH set permissions" do
-      before{ @role = GlobalRole.new :permissions => [:perm1, :perm2, :perm3]}
+      before{ @role = GlobalRole.new permissions: [:perm1, :perm2, :perm3]}
 
       describe :has_permission? do
         it {expect(@role.has_permission?(:perm1)).to be_truthy}
@@ -149,7 +149,7 @@ describe GlobalRole, :type => :model do
     end
 
     describe "WITH set name" do
-      before{ @role = GlobalRole.new :name => "name"}
+      before{ @role = GlobalRole.new name: "name"}
 
       describe :to_s do
         it {expect(@role.to_s).to eql("name")}
@@ -157,7 +157,7 @@ describe GlobalRole, :type => :model do
     end
 
     describe :destroy do
-      before {@role = GlobalRole.create :name => "global"}
+      before {@role = GlobalRole.create name: "global"}
 
       it {@role.destroy}
     end

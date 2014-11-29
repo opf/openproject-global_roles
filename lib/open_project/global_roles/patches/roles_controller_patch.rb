@@ -42,7 +42,7 @@ module OpenProject::GlobalRoles::Patches
           create_global_role
         else
           #we have to duplicate unpatched behaviour here in order to set the parameters for the overwritten views
-          @role = Role.new(permitted_params.role? || { :permissions => Role.non_member.permissions })
+          @role = Role.new(permitted_params.role? || { permissions: Role.non_member.permissions })
           @member_permissions = (@role.setable_permissions || @permissions)
           @global_permissions = GlobalRole.setable_permissions
           create_without_global_roles
@@ -55,12 +55,12 @@ module OpenProject::GlobalRoles::Patches
         @role = GlobalRole.new permitted_params.role
         if @role.save
           flash[:notice] = l(:notice_successful_create)
-          redirect_to :action => 'index'
+          redirect_to action: 'index'
         else
-          @roles = Role.all :order => 'builtin, position'
+          @roles = Role.all order: 'builtin, position'
           @member_permissions = Role.new.setable_permissions
           @global_permissions = GlobalRole.setable_permissions
-          render :template => 'roles/new'
+          render template: 'roles/new'
         end
       end
     end

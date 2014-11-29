@@ -20,7 +20,7 @@
 Given /^there is the global permission "(.+)?" of the module "(.+)?"$/ do |perm_name, perm_module|
   Redmine::AccessControl.map do |map|
     map.project_module perm_module.to_sym do |mod|
-      mod.permission perm_name.to_sym, {:dont => :care}, {:project_module => perm_module.to_sym, :global => true}
+      mod.permission perm_name.to_sym, {dont: :care}, {project_module: perm_module.to_sym, global: true}
     end
   end
 end
@@ -33,7 +33,7 @@ Given /^the global permission "(.+)?" of the module "(.+)?" is defined$/ do |per
 end
 
 Given /^there is a global [rR]ole "([^\"]*)"$/ do |name|
-  FactoryGirl.create(:global_role, :name => name) unless GlobalRole.find_by_name(name)
+  FactoryGirl.create(:global_role, name: name) unless GlobalRole.find_by_name(name)
 end
 
 Given /^the global [rR]ole "([^\"]*)" may have the following [rR]ights:$/ do |role, table|
@@ -62,7 +62,7 @@ Given /^the [Uu]ser (.+) has the global role (.+)$/ do |user, role|
   role = GlobalRole.find_by_name(role.gsub("\"", ""))
 
   as_admin do
-    FactoryGirl.create(:principal_role, :principal => user, :role => role)
+    FactoryGirl.create(:principal_role, principal: user, role: role)
   end
 end
 
@@ -86,8 +86,8 @@ end
 
 Then /^I should (not )?see block with "(.+)?"$/ do |negative , id |
   unless negative
-    expect(page).to have_css("#{id}", :visible => true)
+    expect(page).to have_css("#{id}", visible: true)
   else
-    expect(page).to have_css("#{id}", :visible => false)
+    expect(page).to have_css("#{id}", visible: false)
   end
 end
