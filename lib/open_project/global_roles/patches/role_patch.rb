@@ -23,7 +23,6 @@ module OpenProject::GlobalRoles::Patches
       base.send(:include, InstanceMethods)
       base.send(:extend, ClassMethods)
 
-
       base.class_eval do
         scope :givable, where(builtin: 0, type: 'Role').order('position')
 

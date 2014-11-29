@@ -27,7 +27,7 @@ class GlobalRole < Role
   end
 
   def permissions=(perms)
-    perms = perms.collect {|p| p.to_sym unless p.blank? }.compact.uniq if perms
+    perms = perms.collect { |p| p.to_sym unless p.blank? }.compact.uniq if perms
     write_attribute(:permissions, perms)
   end
 
@@ -48,7 +48,7 @@ class GlobalRole < Role
     super
   end
 
-  def assignable_to?(user)
+  def assignable_to?(_user)
     true
   end
 end

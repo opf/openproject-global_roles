@@ -20,7 +20,7 @@
 Given /^there is the global permission "(.+)?" of the module "(.+)?"$/ do |perm_name, perm_module|
   Redmine::AccessControl.map do |map|
     map.project_module perm_module.to_sym do |mod|
-      mod.permission perm_name.to_sym, {dont: :care}, {project_module: perm_module.to_sym, global: true}
+      mod.permission perm_name.to_sym, { dont: :care }, project_module: perm_module.to_sym, global: true
     end
   end
 end
@@ -28,7 +28,7 @@ end
 Given /^the global permission "(.+)?" of the module "(.+)?" is defined$/ do |perm_name, perm_module|
   as_admin do
     permissions = Redmine::AccessControl.modules_permissions(perm_module)
-    permissions.detect{|p| p.name == perm_name.to_sym && p.global?}.should_not be_nil
+    permissions.detect { |p| p.name == perm_name.to_sym && p.global? }.should_not be_nil
   end
 end
 
@@ -46,7 +46,7 @@ Given /^the global [rR]ole "([^\"]*)" may have the following [rR]ights:$/ do |ro
     table.raw.each do |_perm|
       perm = _perm.first
       unless perm.blank?
-        perm = perm.gsub(" ", "_").underscore.to_sym
+        perm = perm.gsub(' ', '_').underscore.to_sym
         if available_perms.include?(:"#{perm}")
           r.permissions << perm
         end
@@ -58,8 +58,8 @@ Given /^the global [rR]ole "([^\"]*)" may have the following [rR]ights:$/ do |ro
 end
 
 Given /^the [Uu]ser (.+) has the global role (.+)$/ do |user, role|
-  user = User.find_by_login(user.gsub("\"", ""))
-  role = GlobalRole.find_by_name(role.gsub("\"", ""))
+  user = User.find_by_login(user.gsub("\"", ''))
+  role = GlobalRole.find_by_name(role.gsub("\"", ''))
 
   as_admin do
     FactoryGirl.create(:principal_role, principal: user, role: role)
@@ -67,24 +67,24 @@ Given /^the [Uu]ser (.+) has the global role (.+)$/ do |user, role|
 end
 
 When /^I select the available global role (.+)$/ do |role|
-  r = GlobalRole.find_by_name(role.gsub("\"", ""))
+  r = GlobalRole.find_by_name(role.gsub("\"", ''))
   raise "No such role was defined: #{role}" unless r
-  steps %Q{
+  steps %{
     When I check "principal_role_role_ids_#{r.id}"
   }
 end
 
 When /^I delete the assigned role (.+)$/ do |role|
-  g = GlobalRole.find_by_name(role.gsub("\"", ""))
+  g = GlobalRole.find_by_name(role.gsub("\"", ''))
   raise "No such role was defined: #{role}" unless g
-  raise "More than one or no principal has this role" if g.principal_roles.length != 1
+  raise 'More than one or no principal has this role' if g.principal_roles.length != 1
 
-  steps %Q{
+  steps %{
     When I follow "Delete" within "#principal_role-#{g.principal_roles[0].id}"
   }
 end
 
-Then /^I should (not )?see block with "(.+)?"$/ do |negative , id |
+Then /^I should (not )?see block with "(.+)?"$/ do |negative, id |
   unless negative
     expect(page).to have_css("#{id}", visible: true)
   else

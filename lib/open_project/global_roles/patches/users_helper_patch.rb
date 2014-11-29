@@ -31,15 +31,12 @@ module OpenProject::GlobalRoles::Patches
     end
 
     module InstanceMethods
-
       def user_settings_tabs_with_global_roles
         tabs = user_settings_tabs_without_global_roles
         @global_roles ||= GlobalRole.all
-        tabs << {name: 'global_roles', partial: 'users/global_roles', label: "global_roles"}
+        tabs << { name: 'global_roles', partial: 'users/global_roles', label: 'global_roles' }
         tabs
       end
-
-
     end
   end
 end
