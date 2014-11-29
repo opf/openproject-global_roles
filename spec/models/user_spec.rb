@@ -19,7 +19,7 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe User, :type => :model do
+describe User, type: :model do
   let(:klass) { User }
 
   describe :registered_allowance_evaluators do

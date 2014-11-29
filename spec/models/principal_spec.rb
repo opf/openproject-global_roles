@@ -19,8 +19,8 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Principal, :type => :model do
-  describe "ATTRIBUTES" do
+describe Principal, type: :model do
+  describe 'ATTRIBUTES' do
     before :each do
 
     end
@@ -30,13 +30,13 @@ describe Principal, :type => :model do
 
   end
 
-  describe "WHEN deleting a principal" do
+  describe 'WHEN deleting a principal' do
     let(:principal) { FactoryGirl.build(:user) }
     let(:role) { FactoryGirl.build(:global_role) }
 
     before do
-      FactoryGirl.create(:principal_role, :role => role,
-                                      :principal => principal)
+      FactoryGirl.create(:principal_role, role: role,
+                                          principal: principal)
       principal.destroy
     end
 
