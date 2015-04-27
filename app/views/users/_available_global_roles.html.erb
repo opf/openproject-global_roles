@@ -23,7 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 end%>
 
 <div class="grid-content" id="available_principal_roles">
-<fieldset><legend><%= Role.model_name.human(:count => 2) %></legend>
+<fieldset class="form--fieldset">
+  <legend class="form--fieldset-legend"><%= Role.model_name.human(:count => 2) %></legend>
 <span id="additional_principal_roles">
 <%= form_for(:principal_roles, :url => principal_roles_path, :method => :post, :remote => :true) do %>
   <%= hidden_field_tag 'principal_role[principal_id]', user.id %>
@@ -35,6 +36,6 @@ end%>
 </span>
 <span id="no_additional_principal_roles" style="display:none">
 <p id="no_data" class="nodata"><%= l(:label_no_assignable_role) %></p>
-<span>
+</span>
 </fieldset>
 </div>
